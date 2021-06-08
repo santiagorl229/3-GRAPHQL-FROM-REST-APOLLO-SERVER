@@ -1,26 +1,36 @@
-type Query{
+type Query {
   seasonsList: [Season!]!
   racesByYear(year: String!): [Race!]!
+  raceSelect(year: String!, round: Int!):Race
+  historyDrivers(pageElements: Int, page: Int): [Driver!]!
+  driverYear(year: String!): [Driver!]!
+  driversYearAndRound(year: String!, round: Int!): [Driver!]!
+  driverSelect(id: String!): Driver
+  seasonPilotsRanking(year: String!): [DriverStanding!]!
+  historyCircuits(pageElements: Int, page: Int): [Circuit!]!
+  circuitSelect(id: String!): Circuit
 }
 
-type Season{
+type Season {
     year: String!
     url: String!
     urlMobile: String!
 }
 
-type Race{
+type Race {
     season: String!
     round: String!
     url: String!
+    urlMobile: String!
     name: String!
     Circuit: Circuit!
     date: String!
     time: String!
 }
-type Circuit{
+type Circuit {
     id: String!
     url: String!
+    urlMobile: String!
     name: String!
     location: Location!
 }
@@ -29,4 +39,30 @@ type Location {
     lng: String!
     locality: String!
     country: String!
+}
+type Driver {
+    id: String
+    url: String
+    urlMobile: String!
+    name: String
+    dateOfBirth: String
+    nationality: String
+    permanentNumber: String
+    code: String
+} 
+type DriverStanding{
+    position: String!
+    positionText: String!
+    points: String!
+    wins: String!
+    driver: Driver!
+    constructors: [Constructor!]!
+}
+
+type Constructor {
+    id: String!
+    url: String!
+    urlMobile: String!
+    name: String!
+    nationality: String!
 }

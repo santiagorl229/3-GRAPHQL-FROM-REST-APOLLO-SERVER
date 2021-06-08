@@ -17,7 +17,7 @@ export class RacesData extends F1{
     async getYearRound(year: string, round: number){
         year = checkYear(year);
         round = roundCheck(round);
-        return await this.get(`${ year }`,{
+        return await this.get(`${ year }/${round}.json`,{
             cacheOptions: {ttl:60}
         });
     }
